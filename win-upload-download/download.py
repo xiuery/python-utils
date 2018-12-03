@@ -7,16 +7,19 @@ import win32gui
 
 
 class Download:
-    wnd_class = ''
-    wnd_caption = ''
 
     def __init__(self, wnd_class='#32770', wnd_caption='另存为'):
+        """
+        :param wnd_class: window class id, 通过WinSpy工具指向窗体获取
+        :param wnd_caption: window caption, 通过WinSpy工具指向窗体获取,有中英文差别
+        """
         self.wnd_class = wnd_class
         self.wnd_caption = wnd_caption
 
-    def start(self, filename):
+    def execute(self, filename):
         """
-        获取下载窗口并完成下载
+        获取窗体句柄,找到对应输入框
+        :param filename: 文件的全路径
         """
         # 获取下载窗口
         window = win32gui.FindWindow(self.wnd_class, self.wnd_caption)
@@ -42,4 +45,4 @@ if __name__ == '__main__':
 
     # download
     download = Download()
-    download.start('C:\\abc.mht')
+    download.execute('C:\\abc.mht')
